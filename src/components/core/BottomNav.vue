@@ -25,7 +25,7 @@
           { title: 'Home', icon: 'mdi-home-city', route: '/' },
           { title: 'About', icon: 'mdi-account-box', route: '/about' },
           { title: 'Skills', icon: 'mdi-certificate', route: '/skills' },
-          { title: 'Portfolio', icon: 'mdi-eye', route: '/portfolio' },
+          // { title: 'Portfolio', icon: 'mdi-eye', route: '/portfolio' },
           { title: 'Contact', icon: 'mdi-email', route: '/contact' }
         ]
       }

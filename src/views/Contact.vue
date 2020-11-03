@@ -3,7 +3,9 @@
         <app-bar />
         <v-content class="main">
             <v-container>
+               
                 <v-row
+                
                 >
                     <v-col
                      cols="12"
@@ -15,7 +17,7 @@
                         elevation="5"
                         >
                             <v-toolbar
-                            class="primary ml-3 mr-3"
+                            class="ml-3 mr-3 primary"
                             dark
                             id="tool"
                             >
@@ -24,7 +26,7 @@
 
                             <v-container class="body">
                                 <keep-alive>
-                                    <v-form @submit.prevent="sendMail">
+                                    <v-form @submit.prevent="sendMsg" ref="form">
                                         <v-row justify="center" align="center">
                                             <v-col
                                             cols="12"
@@ -32,7 +34,7 @@
                                             sm="12"
                                             >
                                                 <v-text-field
-                                                v-model.lazy="contactFormData.name"
+                                                v-model.trim="formData.name"
                                                 outlined
                                                 label="Name"
                                                 type="text"
@@ -45,7 +47,7 @@
                                             sm="12"
                                             >
                                                 <v-text-field
-                                                v-model.lazy="contactFormData.email"
+                                                v-model.trim="formData.email"
                                                 outlined
                                                 label="Email"
                                                 type="email"
@@ -60,7 +62,7 @@
                                             sm="12"
                                             >
                                                 <v-text-field
-                                                v-model.lazy="contactFormData.contact"
+                                                v-model.trim="formData.phone"
                                                 outlined
                                                 label="Phone Number (Optional)"
                                                 type="tel"
@@ -74,7 +76,7 @@
                                             sm="12"
                                             >
                                                 <v-text-field
-                                                v-model.lazy="contactFormData.subject"
+                                                v-model.trim="formData.subject"
                                                 outlined
                                                 label="Subject"
                                                 type="text"
@@ -89,7 +91,7 @@
                                             sm="12"
                                             >
                                                 <v-textarea
-                                                v-model="contactFormData.message"
+                                                v-model="formData.msg"
                                                 outlined
                                                 name="input-7-1"
                                                 label="Message"
@@ -101,12 +103,21 @@
 
                                         <v-card-actions>
                                             <v-spacer></v-spacer>
+                                            <!-- <v-btn
+                                                class="blue-grey darken-2"
+                                                large
+                                                dark
+                                                @click="revertToOriginal"
+                                            >
+                                                <v-icon left>mdi-autorenew</v-icon>
+                                                revert to original
+                                            </v-btn> -->
                                             <v-btn
                                             dark
                                             class="blue darken-1"
                                             large
                                             type="submit"
-                                            @click="storeMessage"
+                                            @click="sendMsg"
                                             >
                                                 send
                                                 <v-icon right>mdi-send</v-icon>
@@ -116,6 +127,9 @@
                                 </keep-alive>
                             </v-container>
                         </v-card><br>
+
+                        <v-container>
+                        </v-container>
                     </v-col>
                 </v-row>
             </v-container>
@@ -126,7 +140,11 @@
 
 <script>
 import AppBar from '@/components/core/AppBar.vue'
-import BottomNav from '@/components/core/BottomNav.vue';
+import BottomNav from '@/components/core/BottomNav.vue'
+import { db } from '../firebase'
+// import { debounce } from 'debounce'
+
+const documentPath = 'contacts'
 
 export default {
     name: 'contactForm',
@@ -137,35 +155,89 @@ export default {
 
     data() {
         return {
-            forms: [],
-            contactFormData: {
+            contactData: null,
+            formData: {
                 name: '',
                 email: '',
-                contact: '',
+                phone: '',
                 subject: '',
-                message: '',
-                timeStamp: new Date()
+                msg: '',
+                sentOn: new Date()
             },
 
             success: false,
             error: false,
+            state: 'loading',
+            originalData: null
         }
     },
 
+    created: async function() {
+        const docRef = db(documentPath)
+        
+        console.log(await docRef)
+        let data = (await docRef.get()).data()
+
+        if (!data) {
+            data = {
+                name: '',
+                email: '',
+                phone: '',
+                subject: '',
+                msg: '',
+                sentOn: new Date()
+            }
+            docRef.set(data)
+        }
+
+        // this.formData = data
+        
+        this.originalData = { ...data }
+        
+        this.state = 'synced'
+        await this.dispatchData()
+    },
+
     methods: {
-        sendMail() {
-            // do stuffs
+        reset() {
+            this.$refs.form.reset()
         },
-        storeMessage() {
+        
+        async sendMsg() {
             // do stuffs
-            console.log(
-                this.contactFormData.name,
-                this.contactFormData.email,
-                this.contactFormData.contact,
-                this.contactFormData.subject,
-                this.contactFormData.message,
-                this.contactFormData.timeStamp
-            );
+            try {
+                await db.collection('contacts').add(this.formData)
+                this.state = 'synced'
+                this.reset()
+            } catch (err) {
+                this.errorMsg = JSON.stringify(err)
+                this.state = 'error'
+            }
+        },
+
+        async dispatchData() {
+            await this.$store.commit('CONTACT_DATA', this.contactData)
+        },
+
+        // fieldUpdate() {
+        //     this.state = 'modified'
+        //     this.sendMsg()
+        // }, 
+        
+        // debouncedUpdate: debounce(() => {
+        //     this.sendMsg()
+        // }, 1500),
+
+
+        // revertToOriginal() {
+        //     this.state = 'revoked'
+        //     this.formData = { ...this.originalData }
+        // },
+    },
+
+    firestore() {
+        return {
+            contactData: db.doc(documentPath)
         }
     }
 }
@@ -184,6 +256,9 @@ export default {
     }
     .body {
         transform: translateY(-1rem) !important;
+    }
+    .download-btn:hover {
+        background-color: #C8E6C9 !important;
     }
     @media screen and (max-width: 1024px) {
         .main {

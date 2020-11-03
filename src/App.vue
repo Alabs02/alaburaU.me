@@ -24,6 +24,20 @@ export default {
 <style>
   #app {
     background: #fff;
+    overflow-x: hidden !important;
   }
+ 
+
+  @media only screen and (min-width: 1200px) {
+    #app {
+      -ms-overflow-style: none !important;  /* IE and Edge */
+      scrollbar-width: none !important;
+    }
+    
+     ::-webkit-scrollbar {
+      display: none !important;
+    }
+  }
+
 </style>
 

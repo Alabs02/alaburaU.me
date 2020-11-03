@@ -51,6 +51,7 @@
                         <v-btn
                          text
                          class="blue-grey--text"
+                         @click="openGithub"
                         >
                             <v-icon size="20">mdi-github</v-icon>
                         </v-btn>
@@ -59,6 +60,7 @@
                         <v-btn
                          text
                          class="blue-grey--text"
+                         @click="openlinkedin"
                         >
                             <v-icon size="20">mdi-linkedin</v-icon>
                         </v-btn>
@@ -68,13 +70,14 @@
                          text
                          class="blue-grey--text"
                         >
-                            <v-icon size="20">mdi-twitter</v-icon>
+                            <v-icon size="20">mdi-mail</v-icon>
                         </v-btn>
                     </div>
                     <div>
                         <v-btn
                          text
                          class="blue-grey--text"
+                         @click="openFacebook"
                         >
                             <v-icon size="20">mdi-facebook</v-icon>
                         </v-btn>
@@ -93,10 +96,22 @@ export default {
                 { icon: 'mdi-home-city-outline', text: 'Home', route: '/' },
                 { icon: 'mdi-account-box-outline', text: 'About', route: '/about' },
                 { icon: 'mdi-certificate-outline', text: 'Skills', route: '/skills' },
-                { icon: 'mdi-eye-outline', text: 'Portfolio', route: '/portfolio' },
+                // { icon: 'mdi-eye-outline', text: 'Portfolio', route: '/portfolio' },
                 { icon: 'mdi-email-outline', text: 'Contact', route: '/contact' },
             ]
         }
+    },
+
+    methods: {
+        openGithub() {
+            window.open("https://github.com/Alabs02", "_blank")
+        },
+        openlinkedin() {
+            window.open("https://www.linkedin.com/in/alabura-usman-581015188/", "_blank")
+        },
+        openFacebook() {
+            window.open("https://web.facebook.com/usman.alabura.3/", "_blank")
+        },
     }
 }
 </script>

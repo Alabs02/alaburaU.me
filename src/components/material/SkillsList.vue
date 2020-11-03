@@ -11,12 +11,10 @@
                 <template v-slot:default>
                     <thead>
                         <th class="text-left blue-grey--text text--darken-4 blue-grey lighten-4 overline font-weight-bold">Skill</th>
-                        <th class="text-left blue-grey--text text--darken-4 blue-grey lighten-5 overline font-weight-bold">Level of Qualification</th>
                     </thead>
                     <tbody>
                         <tr v-for="(skill, i) in skills" :key="i">
                             <td class="blue-grey--text text--darken-2">{{ skill.name }}</td>
-                            <td class="blue-grey--text text--darken-3">{{ skill.qualification }}</td>
                         </tr>
                     </tbody>
                 </template>
@@ -32,11 +30,11 @@ export default {
         return {
             skills: [
                 {
-                    name: 'HTMl 5',
+                    name: 'HTML 5',
                     qualification: 'Advanced'
                 },
                 {
-                    name: 'Cascading Stylesheet (css)',
+                    name: 'Cascading Stylesheet (css3)',
                     qualification: 'Advanced'
                 },
                 {
@@ -44,47 +42,43 @@ export default {
                     qualification: 'Intermediate'
                 },
                 {
-                    name: 'Python',
+                    name: 'JQuery',
                     qualification: 'Intermediate'
                 },
                 {
-                    name: 'Hypertext Preprocessor (php)',
+                    name: 'Syntactically Awesome Style Sheets (SASS)',
                     qualification: 'Beginner'
                 },
                 {
-                    name: 'Solidity',
-                    qualification: 'Intermediate'
-                },
-                {
-                    name: 'Dart',
-                    qualification: 'Beginner'
-                },
-                {
-                    name: 'Nodejs',
-                    qualification: 'Intermediate'
+                    name: 'Node JS',
+                    qualification: 'Advanced'
                 },
                 {
                     name: 'Nodejs Package Manager (npm)',
                     qualification: 'Advanced'
                 },
                 {
-                    name: 'Vuejs',
+                    name: 'Vue JS',
                     qualification: 'Intermediate'
                 },
                 {
-                    name: 'Reactjs',
+                    name: 'Vuex',
                     qualification: 'Beginner'
                 },
                 {
-                    name: 'Firebase',
+                    name: 'Vuetify JS (UI Framework made for Vue JS)',
                     qualification: 'Intermediate'
                 },
                 {
-                    name: 'Git',
-                    qualification: 'Intermediate'
+                    name: 'Iview JS (UI Framework)',
+                    qualification: 'Beginner'
                 },
                 {
-                    name: 'Vuetifyjs',
+                    name: 'Tailwind CSS',
+                    qualification: 'Advanced'
+                },
+                {
+                    name: 'Bootstrap CSS',
                     qualification: 'Advanced'
                 },
                 {
@@ -98,6 +92,30 @@ export default {
                 {
                     name: 'Flutter Web',
                     qualification: 'Intermediate'
+                },
+                {
+                    name: 'Solidity Ethereum',
+                    qualification: 'Intermediate'
+                },
+                {
+                    name: 'Firebase',
+                    qualification: 'Intermediate'
+                },
+                {
+                    name: 'GraphQL',
+                    qualification: 'Intermediate'
+                },
+                {
+                    name: 'Git',
+                    qualification: 'Intermediate'
+                },
+                {
+                    name: 'Version Control: Github and Bitbucket',
+                    qualification: 'Advanced'
+                },
+                 {
+                    name: 'Editors: VS Code and Atom',
+                    qualification: 'Advanced'
                 },
             ],
         }

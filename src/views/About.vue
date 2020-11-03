@@ -14,7 +14,7 @@
              elevation="4"
             >
               <v-toolbar
-                class="primary ml-3 mr-3"
+                class="ml-3 mr-3 primary"
                 dark
                 id="tool"
                 >
@@ -44,19 +44,21 @@
                     md="6"
                     sm="6"
                     >
-                      <div class="body-1 blue-grey--text text--darken-4 name" id="name">My name is Alabura Usman Aliyu</div>
+                      <div class="title blue-grey--text text--darken-4 name" id="name">My name is <span class="name__me">Alabura Usman Aliyu</span></div>
                     </v-col>
                     
                   </v-row>
                 </v-container>
-                <v-card-text class="body-1 text-justify blue-grey--text text--darken-2">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos laborum est culpa? Eaque qui laborum blanditiis nesciunt, 
-                  optio earum cum repellendus asperiores corporis consectetur recusandae harum adipisci ut accusamus ab!
+                <v-card-text class="text-justify body-1 blue-grey--text text--darken-3">
+                    I am a Web Designer and Front-end Developer based in Jos, Plateau State Nigeria. And a member of UJ hub, University of Jos, I have worked as a part time Front-end Developer in Rimotli Corp in Jos.
+                </v-card-text>
+
+                <v-card-text class="text-justify body-1 blue-grey--text text--darken-3">
+                    I have also worked individually as a UI Developer on some projects.
                 </v-card-text>
             
-                <v-card-text class="body-1 text-justify blue-grey--text text--darken-2">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos laborum est culpa? Eaque qui laborum blanditiis nesciunt, 
-                  optio earum cum repellendus asperiores corporis consectetur recusandae harum adipisci ut accusamus ab!
+                <v-card-text class="text-justify body-1 blue-grey--text text--darken-3">
+                    I am interested in the entire front-end spectrum and working on ambitious projects with optimistic people and also love learning new technologies, building fast and also improving my skill set on new and current jobs.
                 </v-card-text>
               </v-container>
             </v-card>
@@ -153,6 +155,7 @@ export default {
   #name {
     margin-top: 30px !important;
     transform: translateX(-8rem) !important;
+    font-size: 1.5rem;
   }
   .card:hover {
     opacity: .8;
@@ -209,5 +212,11 @@ export default {
     .name {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
     }
+  }
+
+  @media screen and (max-width: 768px) {
+      .name__me {
+         display: block !important; 
+      }
   }
 </style>
